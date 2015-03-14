@@ -13,16 +13,10 @@ run apt-get install -q -y git
 run apt-get install -q -y ghc cabal-install
 run apt-get install -q -y zlib1g-dev
 
-run useradd -s /bin/bash -m hakyll
+run cabal update
+run cabal install hakyll
 
-run su hakyll -c 'cabal update'
-run su hakyll -c 'cabal install hakyll'
+run mkdir /root/src
 
-add build /home/hakyll/build
-
-user hakyll
-env HOME /home/hakyll
 env LANG en_US.UTF-8
-workdir /home/hakyll
-
-entrypoint ["/home/hakyll/build"]
+workdir /root/src
