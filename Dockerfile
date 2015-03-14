@@ -1,22 +1,16 @@
-# Clone and build a Hakyll site
-#
-# See https://github.com/noteed/docker-hakyll.
-
-from ubuntu
-maintainer Vo Minh Thu <noteed@gmail.com>
+from ubuntu:14.04
+maintainer Ivo Jimenez <ivo.jimenez@gmail.com>
 
 run apt-get update
-run apt-get install -q -y language-pack-en
-run update-locale LANG=en_US.UTF-8
-
-run apt-get install -q -y git
-run apt-get install -q -y ghc cabal-install
-run apt-get install -q -y zlib1g-dev
+run apt-get install -qy git ghc cabal-install zlib1g-dev
 
 run cabal update
 run cabal install hakyll
 
-run mkdir /root/src
+# cleanup
+RUN apt-get -yq autoremove && \
+    apt-get clean -y && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-env LANG en_US.UTF-8
+run mkdir /root/src
 workdir /root/src
