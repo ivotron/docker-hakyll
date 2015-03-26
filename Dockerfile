@@ -12,5 +12,10 @@ RUN apt-get -yq autoremove && \
     apt-get clean -y && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+run locale-gen en_US.UTF-8
+env LANG en_US.UTF-8
+env LANGUAGE en_US:en
+env LC_ALL en_US.UTF-8
+
 run mkdir /root/src
 workdir /root/src
